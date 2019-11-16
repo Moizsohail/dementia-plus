@@ -1,7 +1,12 @@
+import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Community extends StatefulWidget {
+  Community(this.userId,this.auth,this._callback);
+  final String userId;
+  final BaseAuth auth;
+  final VoidCallback _callback;
   final String title = "Community";
   @override
   State<StatefulWidget> createState() => _CommunityState();
@@ -28,6 +33,61 @@ class _CommunityState extends State<Community> {
     super.dispose();
   }
 
+  Widget _getCards(int index) {
+    return Card(
+      color: Colors.blue,
+      margin: EdgeInsets.only(top: 10.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      child: Container(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 5,
+                child: InkWell(
+                    onTap: () {},
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "How can i deal with the patients arrogance?",
+                          style: TextStyle(color: Colors.white, fontSize: 23),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          "Anonymous",
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                        Text(
+                          "5 Answers",
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        )
+                      ],
+                    )),
+              ),
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Icon(Icons.thumb_up,color: Colors.white60),
+                      onPressed: () {},
+                    ),
+                    FlatButton(
+                      child: Icon(Icons.thumb_down,color: Colors.white54,),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              )
+            ],
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +107,8 @@ class _CommunityState extends State<Community> {
                       flex: 5,
                       child: TextField(
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.search),
+                          hintText: "Search..",
+                            suffixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(40.0))),
                         controller: mySearchController,
@@ -61,13 +122,12 @@ class _CommunityState extends State<Community> {
                       ))
                 ],
               ),
+              SizedBox(height: 10.0,),
               Expanded(
                   child: ListView.builder(
                 itemCount: posts.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                    child: Text(posts[index]),
-                  );
+                  return _getCards(index);
                 },
               ))
             ],

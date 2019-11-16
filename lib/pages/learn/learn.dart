@@ -1,10 +1,13 @@
+import 'package:dementia_plus/pages/learn/authdirector.dart';
+import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
 import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'community.dart';
+
 
 class Learn extends StatefulWidget {
+  
   @override
   State<StatefulWidget> createState() => _LearnState();
 }
@@ -36,7 +39,7 @@ class _LearnState extends State<Learn> {
         SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 100,
-            child: ImageCardButton("Community", page: Community())),
+            child: ImageCardButton("Community", page: AuthDirector(auth:Auth()))),
         Expanded(
             child: GridView.count(
           crossAxisCount: 2,
