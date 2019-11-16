@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1095120094686",
+    "firebase_url": "https://dementia-plus.firebaseio.com",
+    "project_id": "dementia-plus",
+    "storage_bucket": "dementia-plus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095120094686:android:0a077eeca0e326a757494f",
+        "android_client_info": {
+          "package_name": "com.example.dementia_plus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095120094686-6v3n1rjtg522ukrl43agpu2gqgdhvan8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqKxokQG9fi_G4PAEuh85hC-IHjeTGo14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095120094686-6v3n1rjtg522ukrl43agpu2gqgdhvan8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

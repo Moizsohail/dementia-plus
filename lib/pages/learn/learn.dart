@@ -1,6 +1,8 @@
+import 'package:dementia_plus/ui/appbar.dart';
 import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'community.dart';
 
 class Learn extends StatefulWidget {
   @override
@@ -26,14 +28,15 @@ class _LearnState extends State<Learn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Learn"),
-        centerTitle: true,
-        actions: <Widget>[Icon(Icons.home)],
-      ),
+      appBar: customAppBar(context, "Learn"),
       body: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-        SizedBox(height: 10.0,),
-        SizedBox(width:MediaQuery.of(context).size.width,height: 100,child: ImageCardButton("Community")),
+        SizedBox(
+          height: 10.0,
+        ),
+        SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            child: ImageCardButton("Community", page: Community())),
         Expanded(
             child: GridView.count(
           crossAxisCount: 2,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  Button(this.text, {this.page = Null, this.expanded = true});
+  Button(this.text, {this.page, this.expanded = true});
   final page;
   final String text;
   final bool expanded;
@@ -25,14 +25,18 @@ class Button extends StatelessWidget {
 }
 
 class ImageCardButton extends StatelessWidget {
-  ImageCardButton(this.text);
+  ImageCardButton(this.text,{this.page});
   final String text;
+  final page;
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
       child: InkWell(
-          onTap: () {},
+          onTap: () {(this.page != Null)
+            ? Navigator.push(
+                context, MaterialPageRoute(builder: (context) => this.page))
+            : null;},
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[Text(this.text)],
