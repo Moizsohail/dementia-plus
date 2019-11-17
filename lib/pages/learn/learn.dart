@@ -1,4 +1,5 @@
 import 'package:dementia_plus/pages/learn/authdirector.dart';
+import 'package:dementia_plus/pages/learn/resource.dart';
 import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
 import 'package:dementia_plus/ui/buttons.dart';
@@ -45,7 +46,7 @@ class _LearnState extends State<Learn> {
           crossAxisCount: 2,
           padding: EdgeInsets.all(16.0),
           children: List.generate(learnOptions.length, (index) {
-            return ImageCardButton(learnOptions[index]);
+            return ImageCardButton(learnOptions[index],page:Resource(learnOptions[index]));
           }),
         ))
       ]),

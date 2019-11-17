@@ -1,9 +1,11 @@
+import 'package:dementia_plus/pages/learn/communitycard.dart';
 import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
+import 'package:dementia_plus/ui/misc.dart';
 import 'package:flutter/material.dart';
 
 class Community extends StatefulWidget {
-  Community(this.userId,this.auth,this._callback);
+  Community(this.userId, this.auth, this._callback);
   final String userId;
   final BaseAuth auth;
   final VoidCallback _callback;
@@ -45,7 +47,12 @@ class _CommunityState extends State<Community> {
               Expanded(
                 flex: 5,
                 child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommunityCard()));
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -73,11 +80,14 @@ class _CommunityState extends State<Community> {
                 child: Column(
                   children: <Widget>[
                     FlatButton(
-                      child: Icon(Icons.thumb_up,color: Colors.white60),
+                      child: Icon(Icons.thumb_up, color: Colors.white60),
                       onPressed: () {},
                     ),
                     FlatButton(
-                      child: Icon(Icons.thumb_down,color: Colors.white54,),
+                      child: Icon(
+                        Icons.thumb_down,
+                        color: Colors.white54,
+                      ),
                       onPressed: () {},
                     )
                   ],
@@ -100,29 +110,10 @@ class _CommunityState extends State<Community> {
               SizedBox(
                 height: 10.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                      flex: 5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Search..",
-                            suffixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(40.0))),
-                        controller: mySearchController,
-                      )),
-                  Expanded(
-                      flex: 1,
-                      child: RaisedButton(
-                        child: Icon(Icons.add),
-                        shape: CircleBorder(),
-                        onPressed: () {},
-                      ))
-                ],
+              SearchBar(mySearchController),
+              SizedBox(
+                height: 10.0,
               ),
-              SizedBox(height: 10.0,),
               Expanded(
                   child: ListView.builder(
                 itemCount: posts.length,

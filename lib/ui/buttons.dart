@@ -9,8 +9,9 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      child:
-          SizedBox(width: MediaQuery.of(context).size.width*0.8, child:Center(child: Text(text))),
+      child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: Center(child: Text(text))),
       padding: EdgeInsets.all(20.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
       color: Theme.of(context).primaryColor,
@@ -25,7 +26,7 @@ class Button extends StatelessWidget {
 }
 
 class ImageCardButton extends StatelessWidget {
-  ImageCardButton(this.text,{this.page});
+  ImageCardButton(this.text, {this.page});
   final String text;
   final page;
   @override
@@ -33,10 +34,11 @@ class ImageCardButton extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
       child: InkWell(
-          onTap: () {(this.page != Null)
-            ? Navigator.push(
-                context, MaterialPageRoute(builder: (context) => this.page))
-            : null;},
+          onTap: () {
+            if (this.page != Null)
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => this.page));
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[Text(this.text)],
