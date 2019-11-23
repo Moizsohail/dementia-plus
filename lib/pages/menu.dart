@@ -1,3 +1,6 @@
+import 'package:dementia_plus/pages/tracker/caregiver.dart';
+import 'package:dementia_plus/pages/tracker/map.dart';
+import 'package:dementia_plus/pages/tracker/patient.dart';
 import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +23,9 @@ class _MenuState extends State<Menu> {
           children: <Widget>[
             Button("Learn",page:Learn()),
             SizedBox(height: 10.0,),
-            Button("Professional Help"),
+            Button("Professional Help",page:Patient()),
             SizedBox(height: 10.0,),
-            Button("Locate Patient"),
+            Button("Locate Patient",page:Caregiver()),
           ],
         ),
       ),
