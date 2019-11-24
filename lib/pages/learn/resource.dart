@@ -1,3 +1,4 @@
+import 'package:dementia_plus/pages/learn/dummyresource.dart';
 import 'package:dementia_plus/ui/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,12 +19,27 @@ class _ResourceState extends State<Resource> {
           children: <Widget>[
             Expanded(
               flex: 5,
-              child: Text("Refusal To Eat"),
+              child: InkWell(
+                child: Text(
+                  "Refusal To Eat",
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              DummyResource("Refusal to eat")));
+                },
+              ),
             ),
             Expanded(
               flex: 1,
               child: FlatButton(
-                child: Icon(Icons.favorite),
+                child: Icon(
+                  Icons.favorite_border,
+                  color: Color(0xff1A939A),
+                ),
                 onPressed: () {},
               ),
             )

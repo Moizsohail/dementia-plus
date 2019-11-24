@@ -1,3 +1,8 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dementia_plus/models/community.dart';
+import 'package:dementia_plus/pages/learn/addquestion.dart';
 import 'package:dementia_plus/pages/learn/communitycard.dart';
 import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
@@ -10,21 +15,34 @@ class Community extends StatefulWidget {
   final BaseAuth auth;
   final VoidCallback _callback;
   final String title = "Community";
+  final String collection = "community";
   @override
   State<StatefulWidget> createState() => _CommunityState();
 }
 
 class _CommunityState extends State<Community> {
   final mySearchController = TextEditingController();
-  List<String> posts;
+  List<CommunityModel> posts = [];
+  StreamSubscription<QuerySnapshot> ss;
+  
   @override
   void initState() {
     super.initState();
-    posts = List.generate(7, (i) => i.toString());
-    mySearchController.addListener(() {
+
+    ss = Firestore.instance
+        .collection(widget.collection)
+        .snapshots()
+        .listen((data) {
+      print(data.documents.length);
       setState(() {
-        posts = List.generate(
-            int.parse(mySearchController.text), (i) => i.toString());
+        posts = [];
+        for (int i = 0; i < data.documents.length; i++) {
+          DocumentSnapshot f = data.documents[i];
+          CommunityModel c = CommunityModel();
+          c.fromMap(f);
+          print(f.data);
+          posts.add(c);
+        }
       });
     });
   }
@@ -32,12 +50,13 @@ class _CommunityState extends State<Community> {
   @override
   void dispose() {
     mySearchController.dispose();
+    ss.cancel();
     super.dispose();
   }
 
   Widget _getCards(int index) {
     return Card(
-      color: Colors.blue,
+      color: index%2 == 1?Color(0xff1A939A):Color(0xff55ced5),
       margin: EdgeInsets.only(top: 10.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: Container(
@@ -51,13 +70,14 @@ class _CommunityState extends State<Community> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CommunityCard()));
+                              builder: (context) => CommunityCard(widget.auth,
+                                  widget._callback, posts[index],index%2 == 1?Color(0xff1A939A):Color(0xff55ced5))));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "How can i deal with the patients arrogance?",
+                          posts[index].subject,
                           style: TextStyle(color: Colors.white, fontSize: 23),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -70,7 +90,7 @@ class _CommunityState extends State<Community> {
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                         Text(
-                          "5 Answers",
+                          posts[index].answer.length.toString() + " Answers",
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         )
                       ],
@@ -101,7 +121,19 @@ class _CommunityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppBar(context, widget.title),
+        appBar: customAppBar(context, widget.title,
+            logout: true, logoutfunc: widget._callback),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(Icons.add,),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        AddQuestion(widget.auth, widget._callback)));
+          },
+        ),
         body: Center(
             child: Container(
           width: MediaQuery.of(context).size.width * 0.95,

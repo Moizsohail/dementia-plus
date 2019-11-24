@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  Button(this.text, {this.page, this.expanded = true});
+  Button(this.text, {this.page, this.expanded = true,this.bgcolor,this.onpressed});
   final page;
+  final bgcolor;
+  final VoidCallback onpressed;
   final String text;
   final bool expanded;
   @override
@@ -11,15 +13,19 @@ class Button extends StatelessWidget {
     return RaisedButton(
       child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
-          child: Center(child: Text(text))),
+          child: Center(
+              child: Text(
+            text,
+            style: TextStyle(color: Colors.white),
+          ))),
       padding: EdgeInsets.all(20.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-      color: Theme.of(context).primaryColor,
+      color: (bgcolor==null)?Theme.of(context).primaryColor:bgcolor,
       onPressed: () {
-        (this.page != Null)
-            ? Navigator.push(
-                context, MaterialPageRoute(builder: (context) => this.page))
-            : null;
+        if(this.page != null)
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => this.page));
+        if(onpressed!=null) onpressed();
       },
     );
   }
@@ -41,7 +47,12 @@ class ImageCardButton extends StatelessWidget {
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Text(this.text)],
+            children: <Widget>[
+              Text(
+                this.text,
+                style: TextStyle(color: Colors.black),
+              )
+            ],
           )),
       elevation: 2.0,
       margin: EdgeInsets.all(5.0),

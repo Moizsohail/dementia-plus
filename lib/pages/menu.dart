@@ -1,6 +1,5 @@
-import 'package:dementia_plus/pages/tracker/caregiver.dart';
-import 'package:dementia_plus/pages/tracker/map.dart';
-import 'package:dementia_plus/pages/tracker/patient.dart';
+import 'package:dementia_plus/pages/profhelp/locationinfo.dart';
+import 'package:dementia_plus/pages/tracker/pairprompt.dart';
 import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +22,9 @@ class _MenuState extends State<Menu> {
           children: <Widget>[
             Button("Learn",page:Learn()),
             SizedBox(height: 10.0,),
-            Button("Professional Help",page:Patient()),
+            Button("Professional Help",page:LocationInfo()),
             SizedBox(height: 10.0,),
-            Button("Locate Patient",page:Caregiver()),
+            Button("Locate Patient",page:PairPrompt()),
           ],
         ),
       ),

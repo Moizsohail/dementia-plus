@@ -6,9 +6,7 @@ import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Learn extends StatefulWidget {
-  
   @override
   State<StatefulWidget> createState() => _LearnState();
 }
@@ -31,25 +29,22 @@ class _LearnState extends State<Learn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(context, "Learn"),
-      body: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    return Scaffold(appBar:customAppBar(context, "Community"), body:CustomScrollView(slivers: <Widget>[
+      SliverList(
+          delegate: SliverChildListDelegate(<Widget>[
         SizedBox(
-          height: 10.0,
-        ),
-        SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            child: ImageCardButton("Community", page: AuthDirector(auth:Auth()))),
-        Expanded(
-            child: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(16.0),
-          children: List.generate(learnOptions.length, (index) {
-            return ImageCardButton(learnOptions[index],page:Resource(learnOptions[index]));
-          }),
-        ))
-      ]),
-    );
+            height: 150.0,
+            child:
+                ImageCardButton("Community", page: AuthDirector(auth: Auth())))
+      ])),
+      SliverGrid(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
+          return ImageCardButton(learnOptions[index],
+              page: Resource(learnOptions[index]));
+        }, childCount: learnOptions.length),
+      )
+    ]));
   }
 }

@@ -15,14 +15,34 @@ class _PairPromptState extends State<PairPrompt> {
     return Scaffold(
       appBar: customAppBar(context, "Locate Patient"),
       body: Container(
+        padding: EdgeInsets.all(10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Select appropriate option",
+              "Who are you using this app for",
               maxLines: null,
+              style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize: 20),
             ),
-            Button("Caregiver",page: Caregiver(),),
-            Button("Patient",page: Patient())
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              "You will require two internet connected smartphones for this process",
+              maxLines: null,
+              style: TextStyle(color: Colors.grey,fontStyle: FontStyle.italic),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Button(
+              "Caregiver (To Track)",
+              page: Caregiver(),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Button("Patient (To Locate)", page: Patient())
           ],
         ),
       ),

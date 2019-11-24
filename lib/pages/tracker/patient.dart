@@ -32,7 +32,8 @@ class _PatientState extends State<Patient> {
         .listen((data) async {
       if (data.documents.length == 0) {
         Position pos = await Geolocator().getCurrentPosition();
-        _tracker = Tracker(pin.toString(), GeoPoint(pos.latitude,pos.longitude));
+        _tracker =
+            Tracker(pin.toString(), GeoPoint(pos.latitude, pos.longitude));
         docID = await _firestore.addData(_tracker.toMap());
         setState(() {
           successUpload = true;
@@ -41,7 +42,6 @@ class _PatientState extends State<Patient> {
         setState(() {});
       }
     });
-    
   }
 
   void listenForConnection() {
@@ -58,12 +58,14 @@ class _PatientState extends State<Patient> {
                     Sender(docID, pin.toString())));
     });
   }
+
   @override
-  void dispose() { 
+  void dispose() {
     subscription.cancel();
     subscription2.cancel();
     super.dispose();
   }
+
   @override
   void initState() {
     super.initState();
@@ -79,9 +81,24 @@ class _PatientState extends State<Patient> {
     return Scaffold(
       appBar: customAppBar(context, "Patient"),
       body: Center(
-        child:
-            successUpload ? Text(pin.toString()) : CircularProgressIndicator(),
-      ),
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          successUpload
+              ? Text(pin.toString(),
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 100))
+              : CircularProgressIndicator(),
+          successUpload
+              ? Text(
+                  "Enter this key in another smartphone",
+                  style: TextStyle(color: Colors.grey,fontStyle: FontStyle.italic),
+                )
+              : Text("Please Wait"),
+        ],
+      )),
     );
   }
 }
