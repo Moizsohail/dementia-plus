@@ -60,7 +60,7 @@ class _ResourceState extends State<Resource> {
                 floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                    title: Text(widget.title),
+                    title: Text(widget.title,style: TextStyle(color: Colors.white),),
                     background: Image.network(
                       "https://images.pexels.com/photos/278312/pexels-photo-278312.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
                       fit: BoxFit.cover,

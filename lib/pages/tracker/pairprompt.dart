@@ -19,10 +19,20 @@ class _PairPromptState extends State<PairPrompt> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Expanded(child: Container()),
+            Center(
+              child: Container(
+                child: Image.asset("img/wifi.png"),
+              ),
+            ),
+            Expanded(child: Container()),
             Text(
               "Who are you using this app for",
               maxLines: null,
-              style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize: 20),
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
             ),
             SizedBox(
               height: 4,
@@ -30,7 +40,7 @@ class _PairPromptState extends State<PairPrompt> {
             Text(
               "You will require two internet connected smartphones for this process",
               maxLines: null,
-              style: TextStyle(color: Colors.grey,fontStyle: FontStyle.italic),
+              style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic),
             ),
             SizedBox(
               height: 15,
@@ -42,7 +52,8 @@ class _PairPromptState extends State<PairPrompt> {
             SizedBox(
               height: 15,
             ),
-            Button("Patient (To Locate)", page: Patient())
+            Button("Patient (To Locate)", page: Patient()),
+            Expanded(child: Container()),
           ],
         ),
       ),

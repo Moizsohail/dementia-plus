@@ -48,6 +48,7 @@ class _AuthDirectorState extends State<AuthDirector> {
 
   void logoutCallback() {
     setState(() {
+      widget.auth.signOut();
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });

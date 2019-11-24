@@ -20,6 +20,9 @@ class _MenuState extends State<Menu> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 18,right: 18,bottom: 130),
+              child:Image.asset('img/dc.png')),
             Button("Learn",page:Learn()),
             SizedBox(height: 10.0,),
             Button("Professional Help",page:LocationInfo()),

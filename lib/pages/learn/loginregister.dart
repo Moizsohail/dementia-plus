@@ -1,5 +1,6 @@
 import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
+import 'package:dementia_plus/ui/buttons.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -22,7 +23,10 @@ class _LoginState extends State<Login> {
   String password;
   Widget getField(String text, String hint, callback) {
     return TextFormField(
-      decoration: InputDecoration(hintText: hint),
+      decoration: InputDecoration(
+          hintText: hint,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+      style: TextStyle(color: Colors.black),
       validator: (e) {
         if (e.length == 0) return "You cannot leave this empty";
         return null;
@@ -47,23 +51,19 @@ class _LoginState extends State<Login> {
           widget._callback();
         }).catchError((e) {
           final snackBar = SnackBar(
-              content: Text(e.message,
-                  style: TextStyle(color: Theme.of(context).primaryColor)),
+              content: Text(e.message, style: TextStyle(color: Colors.white)),
               backgroundColor: Colors.greenAccent);
           Scaffold.of(ctx).showSnackBar(snackBar);
         });
       }
-    }
-    else{
+    } else {
       if (validateAndSave()) {
         widget.auth.signUp(email, password).then((e) {
           widget._callback();
         }).catchError((e) {
-          
           final snackBar = SnackBar(
-              content: Text(e.message,
-                  style: TextStyle(color: Theme.of(context).primaryColor)),
-              backgroundColor: Colors.greenAccent);
+              content: Text(e.message, style: TextStyle(color: Colors.white)),
+              backgroundColor: Theme.of(context).primaryColor);
           Scaffold.of(ctx).showSnackBar(snackBar);
         });
       }
@@ -80,41 +80,54 @@ class _LoginState extends State<Login> {
         appBar: customAppBar(context, widget.title),
         body: Builder(builder: (BuildContext ctx) {
           return Container(
+              padding: EdgeInsets.all(10),
               child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Sign In",
-                  style: TextStyle(fontSize: 15.0),
+                key: _formKey,
+                child: ListView(
+                  children: <Widget>[
+                    Text(
+                      "Sign In",
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    getField("Email", "youremail@mail.com", (x) {
+                      email = x;
+                    }),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    getField("Password", "******", (x) {
+                      password = x;
+                    }),
+                    SizedBox(
+                      height: 45,
+                    ),
+                    Button(
+                      "Sign In",
+                      onpressed: () {
+                        validateAndSubmit(ctx);
+                      },
+                    ),
+                    // RaisedButton(
+                    //   onPressed: () => validateAndSubmit(ctx),
+                    //   child: Text("Sign In"),
+                    // ),
+                    FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          _formStatus = FormStatus.register;
+                        });
+                      },
+                      child: Text("I do not have an account"),
+                    ),
+                  ],
                 ),
-                getField("Email", "youremail@mail.com", (x) {
-                  email = x;
-                }),
-                getField("Password", "******", (x) {
-                  password = x;
-                }),
-                RaisedButton(
-                  onPressed: () => validateAndSubmit(ctx),
-                  child: Text("Sign In"),
-                ),
-                Row(children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        _formStatus = FormStatus.register;
-                      });
-                    },
-                    child: Text("I do not have an account"),
-                  ),
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text("I forgot my password"),
-                  ),
-                ]),
-              ],
-            ),
-          ));
+              ));
         }));
   }
 
@@ -123,41 +136,47 @@ class _LoginState extends State<Login> {
         appBar: customAppBar(context, widget.title),
         body: Builder(builder: (BuildContext ctx) {
           return Container(
+              padding: EdgeInsets.all(10),
               child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                getField("Email", "youremail@mail.com", (x) {
-                  email = x;
-                }),
-                getField("Password", "******", (x) {
-                  password = x;
-                }),
-                RaisedButton(
-                  onPressed: () => validateAndSubmit(ctx),
-                  child: Text("Sign Up"),
-                ),
-                Row(children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        _formStatus = FormStatus.login;
-                      });
-                    },
-                    child: Text("I do not have an account"),
-                  ),
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text("I forgot my password"),
-                  ),
-                ]),
-              ],
-            ),
-          ));
+                  key: _formKey,
+                  child: ListView(children: <Widget>[
+                    Text(
+                      "Register",
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    getField("Email", "youremail@mail.com", (x) {
+                      email = x;
+                    }),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    getField("Password", "******", (x) {
+                      password = x;
+                    }),
+                    SizedBox(
+                      height: 45,
+                    ),
+                    Button(
+                      "Register",
+                      onpressed: () => validateAndSubmit(ctx),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        setState(() {
+                          _formStatus = FormStatus.login;
+                        });
+                      },
+                      child: Text(
+                        "Already have an account",
+                      ),
+                    ),
+                  ])));
         }));
   }
 }
