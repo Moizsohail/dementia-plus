@@ -19,9 +19,9 @@ class _LocationInfoState extends State<LocationInfo> {
           child: Column(
         children: <Widget>[
           Text("Enter your location"),
-          TextField(decoration: InputDecoration(hintText: "Enter Area",prefixIcon: Icon(Icons.location_city),border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)))),
+          TextField(style: TextStyle(color:Colors.black),decoration: InputDecoration(hintText: "Enter Area",prefixIcon: Icon(Icons.location_city),border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)))),
           SizedBox(height:15.0),
-          TextField(decoration: InputDecoration(hintText: "Enter City",prefixIcon: Icon(Icons.place),border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)))),
+          TextField(style: TextStyle(color:Colors.black),decoration: InputDecoration(hintText: "Enter City",prefixIcon: Icon(Icons.place),border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)))),
           Expanded(
             child: Text('hi'),
           ),
