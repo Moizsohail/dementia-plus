@@ -4,6 +4,7 @@ import 'package:dementia_plus/tools/authentication.dart';
 import 'package:dementia_plus/ui/appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dementia_plus/ui/buttons.dart';
 
 class AddQuestion extends StatefulWidget {
   AddQuestion(this.auth, this._callback);
@@ -19,6 +20,7 @@ class _AddQuestionState extends State<AddQuestion> {
         hintText: text,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)));
   }
+
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   @override
@@ -27,6 +29,7 @@ class _AddQuestionState extends State<AddQuestion> {
     controller2.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,9 @@ class _AddQuestionState extends State<AddQuestion> {
           child: Form(
               child: ListView(
             children: <Widget>[
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               TextField(
                 style: TextStyle(color: Colors.black),
                 controller: controller1,
@@ -46,7 +51,9 @@ class _AddQuestionState extends State<AddQuestion> {
                 maxLines: 3,
                 maxLength: 100,
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               TextField(
                 style: TextStyle(color: Colors.black),
                 controller: controller2,
@@ -55,17 +62,16 @@ class _AddQuestionState extends State<AddQuestion> {
                 decoration: inputDecoration("Description..."),
                 maxLength: 400,
               ),
-              SizedBox(height: 20.0,),
-              RaisedButton(
-                child: Text("Ask"),
-                onPressed: () {
-                  CommunityModel c = CommunityModel();
-                  c.subject = controller1.text;
-                  c.description= controller2.text;
-                  Firestore.instance.collection("community").add(c.toMap());
-                  Navigator.pop(context);
-                },
-              )
+              SizedBox(
+                height: 20.0,
+              ),
+              Button("Ask", onpressed: () {
+                CommunityModel c = CommunityModel();
+                c.subject = controller1.text;
+                c.description = controller2.text;
+                Firestore.instance.collection("community").add(c.toMap());
+                Navigator.pop(context);
+              })
             ],
           )),
         ));

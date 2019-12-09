@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
-  Button(this.text, {this.page, this.expanded = true,this.bgcolor,this.onpressed});
+  Button(this.text,
+      {this.page, this.expanded = true, this.bgcolor, this.onpressed});
   final page;
   final bgcolor;
   final VoidCallback onpressed;
@@ -20,25 +21,28 @@ class Button extends StatelessWidget {
           ))),
       padding: EdgeInsets.all(20.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-      color: (bgcolor==null)?Theme.of(context).primaryColor:bgcolor,
+      color: (bgcolor == null) ? Theme.of(context).primaryColor : bgcolor,
       onPressed: () {
-        if(this.page != null)
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => this.page));
-        if(onpressed!=null) onpressed();
+        if (this.page != null)
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => this.page));
+        if (onpressed != null) onpressed();
       },
     );
   }
 }
 
 class ImageCardButton extends StatelessWidget {
-  ImageCardButton(this.text, {this.page});
+  ImageCardButton(this.text, {this.page, this.image, this.bgColor});
+  final Color bgColor;
   final String text;
+  final String image;
   final page;
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+      color: bgColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       child: InkWell(
           onTap: () {
             if (this.page != Null)
@@ -47,15 +51,10 @@ class ImageCardButton extends StatelessWidget {
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                this.text,
-                style: TextStyle(color: Colors.black),
-              )
-            ],
+            children: <Widget>[Text(this.text, style: TextStyle(fontSize: 16))],
           )),
       elevation: 2.0,
-      margin: EdgeInsets.all(5.0),
+      margin: EdgeInsets.all(8.0),
     );
   }
 }

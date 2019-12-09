@@ -23,7 +23,7 @@ class _DummyContactsState extends State<DummyContacts> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Person" + index.toString(),
+                      "Person" + (index+1).toString(),
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(

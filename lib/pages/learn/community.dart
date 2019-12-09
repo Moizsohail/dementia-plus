@@ -33,14 +33,13 @@ class _CommunityState extends State<Community> {
         .collection(widget.collection)
         .snapshots()
         .listen((data) {
-      print(data.documents.length);
+      
       setState(() {
         posts = [];
         for (int i = 0; i < data.documents.length; i++) {
           DocumentSnapshot f = data.documents[i];
           CommunityModel c = CommunityModel();
           c.fromMap(f);
-          print(f.data);
           posts.add(c);
         }
       });

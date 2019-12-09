@@ -53,7 +53,7 @@ class _CommunityCardState extends State<CommunityCard> {
         appBar: customAppBar(context, "Community",
             logoutfunc: widget._callback, logout: true),
         body: Container(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(2),
           child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14.0)),
@@ -79,8 +79,9 @@ class _CommunityCardState extends State<CommunityCard> {
                                               widget.post.subject,
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 30),
+                                                  fontSize: 28),
                                             ),
+                                            SizedBox(height:2),
                                             Text(widget.post.description,
                                                 style: TextStyle(
                                                     color: Colors.white,

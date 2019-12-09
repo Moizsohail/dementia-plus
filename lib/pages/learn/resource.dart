@@ -1,16 +1,18 @@
 import 'package:dementia_plus/pages/learn/dummyresource.dart';
-import 'package:dementia_plus/ui/appbar.dart';
+import 'package:dementia_plus/tools/learnOption.dart';
+
 import 'package:flutter/material.dart';
 
 class Resource extends StatefulWidget {
   Resource(this.title);
-  final String title;
+  
+  final LearnOption title;
   @override
   State<StatefulWidget> createState() => _ResourceState();
 }
 
 class _ResourceState extends State<Resource> {
-  Widget getCard() {
+  Widget getCard(index) {
     return Container(
         child: Card(
       child: Container(
@@ -21,7 +23,7 @@ class _ResourceState extends State<Resource> {
               flex: 5,
               child: InkWell(
                 child: Text(
-                  "Refusal To Eat",
+                  widget.title.data[index],
                   style: TextStyle(color: Colors.black),
                 ),
                 onTap: () {
@@ -60,7 +62,7 @@ class _ResourceState extends State<Resource> {
                 floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                    title: Text(widget.title,style: TextStyle(color: Colors.white),),
+                    title: Text(widget.title.title,style: TextStyle(color: Colors.white),),
                     background: Image.network(
                       "https://images.pexels.com/photos/278312/pexels-photo-278312.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
                       fit: BoxFit.cover,
@@ -68,9 +70,9 @@ class _ResourceState extends State<Resource> {
           ];
         },
         body: ListView.builder(
-          itemCount: 2,
+          itemCount: widget.title.data.length,
           itemBuilder: (context, index) {
-            return getCard();
+            return getCard(index);
           },
         ),
       ),

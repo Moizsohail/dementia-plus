@@ -46,13 +46,13 @@ class _PairPromptState extends State<PairPrompt> {
               height: 15,
             ),
             Button(
-              "Caregiver (To Track)",
+              "Caregiver (Pair With Key)",
               page: Caregiver(),
             ),
             SizedBox(
               height: 15,
             ),
-            Button("Patient (To Locate)", page: Patient()),
+            Button("Patient (Generate Key)", page: Patient()),
             Expanded(child: Container()),
           ],
         ),

@@ -56,7 +56,7 @@ class _DummyResourceState extends State<DummyResource> {
                       fontSize: 30.0)),
                       SizedBox(height: 15,),
               Text(
-                "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ",
+                "This resource is currently unavailable",
                 style: TextStyle(color: Colors.black),
               )
             ],

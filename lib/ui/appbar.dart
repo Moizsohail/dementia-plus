@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
-AppBar customAppBar(BuildContext context, String text,{bool logout=false,void logoutfunc()}) {
+AppBar customAppBar(BuildContext context, String text,
+    {bool logout = false, void logoutfunc()}) {
   return AppBar(
-    elevation: 0.0,
-    iconTheme: IconThemeData(color: (Colors.grey)),
-    backgroundColor: Colors.white10,
-    title: Text(text,style: TextStyle(color: Colors.grey),),
+    iconTheme: IconThemeData(color: (Colors.white)),
+    title: Text(
+      text,
+      style: TextStyle(color: Colors.white),
+    ),
     centerTitle: true,
-    
     actions: <Widget>[
       FlatButton(
-        child: Icon(!logout?Icons.home:Icons.exit_to_app,color: Colors.grey,),
+        child: Icon(
+          !logout ? Icons.home : Icons.exit_to_app,
+          color: Colors.white,
+        ),
         onPressed: () {
-          if(!logout)
+          if (!logout)
             Navigator.of(context).pushNamedAndRemoveUntil(
                 '/home', (Route<dynamic> route) => false);
-          else{
+          else {
             Navigator.of(context).pushNamedAndRemoveUntil(
                 '/auth', (Route<dynamic> route) => false);
             logoutfunc();
